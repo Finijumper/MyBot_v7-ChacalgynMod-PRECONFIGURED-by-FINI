@@ -80,7 +80,6 @@ Func UpdateHeroStatus() ;	Show on Profile Stats - Demen
 
     For $i = 0 to 2
         $sHeroStatus = ArmyHeroStatus($i)
-;		Setlog("---Checking status of " & NameOfTroop($i+$eKing) & ": " & $sHeroStatus)
 		If $ichkSwitchAcc = 1 Then $hHero = $g_ahLblHeroStatus[$i][$nCurProfile - 1]
 
 		Select

@@ -353,7 +353,6 @@ Func CheckSwitchAcc() ; Switch CoC Account with or without sleep combo - DEMEN
 			readConfig()
 			applyConfig()
 			DisableGuiControls()
-			checkMainScreen()
 		EndIf
 		If $SwitchCase <> $eStay Then runBot()
 	EndIf
@@ -512,7 +511,7 @@ Func SwitchCOCAcc()
 			$g_abNotNeedAllTime[1] = 1
 			$aAttackedCountSwitch[$nCurProfile - 1] = $aAttackedCountAcc[$nCurProfile - 1]
 
-			If IsMainPage(100) Then ExitLoop; Waiting for fully load CoC in 10 sec
+			If IsMainPage(80) Then ExitLoop; Waiting for fully load CoC in 8 sec
 			ExitLoop
 
 		Else
@@ -522,6 +521,8 @@ Func SwitchCOCAcc()
 
 		EndIf
 	WEnd
+
+	If isOnBuilderIsland(True) Then GoToNormalVillage()
 
 EndFunc   ;==>SwitchCOCAcc
 

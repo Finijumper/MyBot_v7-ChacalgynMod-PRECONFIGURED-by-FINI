@@ -95,7 +95,7 @@ Func btnDeleteCancel()
 					; create new default profile
 					createProfile(True)
 				EndIf
-				RemoveProfileFromList($iDeleteProfile)								; SwitchAcc - Demen
+				RemoveProfileFromList($iDeleteProfile)								; SwitchAcc_Demen_Style
 			EndIf
 		Case $g_hBtnCancelProfileChange
 			GUICtrlSetState($g_hTxtVillageName, $GUI_HIDE)
