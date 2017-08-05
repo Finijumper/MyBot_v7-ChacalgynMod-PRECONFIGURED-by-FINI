@@ -95,7 +95,7 @@ Func btnDeleteCancel()
 					; create new default profile
 					createProfile(True)
 				EndIf
-				RemoveProfileFromList($iDeleteProfile)								; SwitchAcc_Demen_Style
+				RemoveProfileFromList($iDeleteProfile)								; SwitchAcc - Demen
 			EndIf
 		Case $g_hBtnCancelProfileChange
 			GUICtrlSetState($g_hTxtVillageName, $GUI_HIDE)
@@ -521,3 +521,11 @@ Func ChkTreasuryCollect()
 		GUICtrlSetState($g_hTxtTreasuryDark, $GUI_DISABLE)
 	EndIf
 EndFunc		;==> ChkTreasuryCollect
+
+Func chkStartClockTowerBoost()
+	If GUICtrlRead($g_hChkStartClockTowerBoost) = $GUI_CHECKED Then
+		GUICtrlSetState($g_hChkCTBoostBlderBz, $GUI_ENABLE)
+	Else
+		GUICtrlSetState($g_hChkCTBoostBlderBz, $GUI_DISABLE)
+	EndIf
+EndFunc   ;==>chkStartClockTowerBoost

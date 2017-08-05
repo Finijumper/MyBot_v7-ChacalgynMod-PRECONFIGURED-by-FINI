@@ -56,7 +56,7 @@ Func UpgradeBuilding()
 	$iAvailBldr = $g_iFreeBuilderCount - ($g_bUpgradeWallSaveBuilder = True ? 1 : 0)
 
 	If $iAvailBldr <= 0 Then
-		Setlog("No builder available for upgrade process", $COLOR_ERROR)
+		Setlog("No builder available for upgrade process")
 		Return False
 	EndIf
 
@@ -70,7 +70,7 @@ Func UpgradeBuilding()
 
 		; Check free builder in case of multiple upgrades, but skip check when time to check repeated upgrades.
 		If $iAvailBldr <= 0 And $bChkAllRptUpgrade = False Then
-			Setlog("No builder available for #" & $iz + 1 & ", " & $g_avBuildingUpgrades[$iz][4], $COLOR_ERROR)
+			Setlog("No builder available for #" & $iz + 1 & ", " & $g_avBuildingUpgrades[$iz][4])
 			Return False
 		EndIf
 
@@ -107,7 +107,7 @@ Func UpgradeBuilding()
 					ContinueLoop ; Not ready yet..
 				ElseIf ($iAvailBldr <= 0) Then
 					; must stop upgrade attempt if no builder here, due bypass of available builder check when $bChkAllRptUpgrade=true to get updated building values.
-					Setlog("No builder available for " & $g_avBuildingUpgrades[$iz][4], $COLOR_ERROR)
+					Setlog("No builder available for " & $g_avBuildingUpgrades[$iz][4])
 					ContinueLoop
 				EndIf
 			EndIf
@@ -216,6 +216,10 @@ Func UpgradeNormal($inum)
 
 	$aResult = BuildingInfo(242, 520 + $g_iBottomOffsetY) ; read building name/level to check we have right bldg or if collector was not full
 
+	If UBound($aResult) < 2 Then
+		; bot stopped
+		Return False
+	EndIf
 	If StringStripWS($aResult[1], BitOR($STR_STRIPLEADING, $STR_STRIPTRAILING)) <> StringStripWS($g_avBuildingUpgrades[$inum][4], BitOR($STR_STRIPLEADING, $STR_STRIPTRAILING)) Then ; check bldg names
 
 		SetLog("#" & $inum + 1 & ":" & $g_avBuildingUpgrades[$inum][4] & ": Not same as :" & $aResult[1] & ":? Retry now...", $COLOR_INFO)
@@ -273,7 +277,7 @@ Func UpgradeNormal($inum)
 					Return False
 				EndIf
 				SetLog("Upgrade #" & $inum + 1 & " " & $g_avBuildingUpgrades[$inum][4] & " started", $COLOR_SUCCESS)
-				GUICtrlSetImage($g_hPicUpgradeStatus[$inum], $g_sLibIconPath, $eIcnGreenLight) ; Change GUI upgrade status to done
+				_GUICtrlSetImage($g_hPicUpgradeStatus[$inum], $g_sLibIconPath, $eIcnGreenLight) ; Change GUI upgrade status to done
 				$g_aiPicUpgradeStatus[$inum] = $eIcnGreenLight ; Change GUI upgrade status to done
 				GUICtrlSetData($g_hTxtUpgradeValue[$inum], -($g_avBuildingUpgrades[$inum][2])) ; Show Negative Upgrade value in GUI
 				;$itxtUpgradeValue[$inum] = -($g_avBuildingUpgrades[$inum][2]) ; Show Negative Upgrade value in GUI
@@ -314,7 +318,7 @@ Func UpgradeNormal($inum)
 					Return False
 				EndIf
 				SetLog("Upgrade #" & $inum + 1 & " " & $g_avBuildingUpgrades[$inum][4] & " started", $COLOR_GREEN)
-				GUICtrlSetImage($g_hPicUpgradeStatus[$inum], $g_sLibIconPath, $eIcnGreenLight) ; Change GUI upgrade status to done
+				_GUICtrlSetImage($g_hPicUpgradeStatus[$inum], $g_sLibIconPath, $eIcnGreenLight) ; Change GUI upgrade status to done
 				$g_aiPicUpgradeStatus[$inum] = $eIcnGreenLight ; Change GUI upgrade status to done
 				GUICtrlSetData($g_hTxtUpgradeValue[$inum], -($g_avBuildingUpgrades[$inum][2])) ; Show Negative Upgrade value in GUI
 				;$itxtUpgradeValue[$inum] = -($g_avBuildingUpgrades[$inum][2]) ; Show Negative Upgrade value in GUI
@@ -383,7 +387,7 @@ Func UpgradeHero($inum)
 					Return False
 				EndIf
 				SetLog("Hero Upgrade #" & $inum + 1 & " " & $g_avBuildingUpgrades[$inum][4] & " started", $COLOR_SUCCESS)
-				GUICtrlSetImage($g_hPicUpgradeStatus[$inum], $g_sLibIconPath, $eIcnGreenLight) ; Change GUI upgrade status to done
+				_GUICtrlSetImage($g_hPicUpgradeStatus[$inum], $g_sLibIconPath, $eIcnGreenLight) ; Change GUI upgrade status to done
 				$g_aiPicUpgradeStatus[$inum] = $eIcnGreenLight ; Change GUI upgrade status to done
 				GUICtrlSetData($g_hTxtUpgradeValue[$inum], -($g_avBuildingUpgrades[$inum][2])) ; Show Negative Upgrade value in GUI
 				;$itxtUpgradeValue[$inum] = -($g_avBuildingUpgrades[$inum][2]) ; Show Negative Upgrade value in GUI
